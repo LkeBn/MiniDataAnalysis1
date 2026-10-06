@@ -1,2 +1,2 @@
 # MiniDataAnalysis1
-Mini data analysis deliverable 1
+This repository contains my mini data analysis project using the Boulder Housing data set.
