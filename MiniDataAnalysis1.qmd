@@ -199,6 +199,15 @@ Your task is to create a table that calculates the proportion of missing values 
 
 ```{r}
 ### Explore missingness here ###
+### Explore missingness here ###
+
+boulderhousing |>
+  summarize(
+    across(
+      everything(),
+      ~ mean(is.na(.))
+    )
+  )
 
 ```
 
@@ -223,7 +232,7 @@ If missingness is not an issue, describe why.
 
 <!-------------------------- Start your work below ---------------------------->
 
-
+Missingness is not an issue for my analysis because the variabels I am interested in, such as the number of bedrooms, year bilt, and home design, do not have any missing values. Therefore, I can continue withmy original research questions without making any changes.
 
 
 <!----------------------------------------------------------------------------->
@@ -249,7 +258,20 @@ Show the first 6 rows of the tidied data.
 
 <!-------------------------- Start your work below ---------------------------->
 ```{r}
+boulder_tidy <- boulderhousing |>
+  
+  select(
+    BEDROOMS,
+    BLDG1_YEAR_BUILT,
+    BLDG1_DESIGN
+  ) |>
+  rename(
+    bedrooms = BEDROOMS,
+    year_built = BLDG1_YEAR_BUILT,
+    design = BLDG1_DESIGN
+  )
 
+head(boulder_tidy)
 
 
 
@@ -267,7 +289,17 @@ Show the outputted table.
 <!-------------------------- Start your work below ---------------------------->
 ```{r}
 
-
+boulder_tidy |>
+  summarize(
+    across(
+      where(is.numeric),
+      list(
+        mean = ~ mean(.x, na.rm = TRUE),
+        min = ~ min(.x, na.rm = TRUE),
+        max = ~ max(.x, na.rm = TRUE)
+      )
+    )
+  )
 
 
 ```
